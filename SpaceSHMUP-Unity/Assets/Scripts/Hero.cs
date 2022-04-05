@@ -2,8 +2,8 @@
  * Created by: Akram Taghavi-Burris
  * Date Created: March 16, 2022
  * 
- * Last Edited by: 
- * Last Edited:
+ * Last Edited by: Kameron Eaton
+ * Last Edited: April 5, 2022
  * 
  * Description: Hero ship controller
 ****/
@@ -96,7 +96,19 @@ public class Hero : MonoBehaviour
     {
 
         //player input
+        float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");
 
+        //Change the transform based on the axis
+        Vector3 pos = transform.position;
+
+        pos.x += xAxis * speed * Time.deltaTime;
+        pos.y += yAxis * speed * Time.deltaTime;
+
+        transform.position = pos;
+
+        //Rotate the ship to make it feel more dynamic
+        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
     }//end Update()
 
@@ -105,7 +117,25 @@ public class Hero : MonoBehaviour
     //Taking Damage
     private void OnTriggerEnter(Collider other)
     {
+        Transform rootT = other.gameObject.transform.root;
+        //returns the topmost transform in the hierarchy
 
+        GameObject go = rootT.gameObject;
+
+        if (go == lastTriggerGo) { return; }
+
+        lastTriggerGo = go;
+
+        if(go.tag == "Enemy")
+        {
+            Debug.Log("Triggered by Enemy " + other.gameObject.name);
+            shieldLevel--;
+            Destroy(go);
+        }
+        else
+        {
+            Debug.Log("Triggered by non-enemy " + other.gameObject.name);
+        }
     }//end OnTriggerEnter()
 
 }
