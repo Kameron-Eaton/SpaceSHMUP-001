@@ -3,7 +3,7 @@
  * Date Created: April 5, 2022
  * 
  * Last Edited by: NA
- * Last Edited: April 5, 2022
+ * Last Edited: April 6, 2022
  * 
  * Description: Spawns enemies within boundary
 ****/
@@ -46,9 +46,6 @@ public class EnemySpawner : MonoBehaviour
         Vector3 pos = Vector3.zero;
         float xMin = -bndCheck.camWidth + enemyPadding;
         float xMax = bndCheck.camWidth - enemyPadding;
-
-        pos.x = Random.Range(xMin, xMax);
-        pos.y = bndCheck.camHeight + enemyPadding;
 
         pos.x = Random.Range(xMin, xMax); //range between the xmin and xmax
         pos.y = bndCheck.camHeight + enemyPadding; //height plus padding, off

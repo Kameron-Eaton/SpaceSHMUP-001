@@ -3,7 +3,7 @@
  * Date Created: March 16, 2022
  * 
  * Last Edited by: Kameron Eaton
- * Last Edited: April 5, 2022
+ * Last Edited: April 6, 2022
  * 
  * Description: Enemy controler
 ****/
@@ -67,4 +67,20 @@ public class Enemy : MonoBehaviour
         temPos.y -= speed * Time.deltaTime; //temporary y position, moving down
         pos = temPos; //position is equal to temporary position
     }//end Move
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject otherGo = collision.gameObject; //reference to colliding object
+        if(otherGo.tag == "ProjectileHero")
+        {
+            Debug.Log("Enemy hit by projectile" + otherGo.name);
+            Destroy(otherGo); //destroy projectile
+            GameManager.GM.UpdateScore(score); //add to score
+            Destroy(gameObject); //destroy the enemy
+        }
+        else
+        {
+            Debug.Log("Enemy hit by non-projectile" + otherGo.name);
+        }//end if(otherGo.tag == "ProjectileHero")
+    }//end OnCollisionEnter
 }//end Enemy

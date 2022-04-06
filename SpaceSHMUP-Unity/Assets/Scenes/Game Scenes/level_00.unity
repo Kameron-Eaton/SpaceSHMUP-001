@@ -507,6 +507,7 @@ MonoBehaviour:
   defaultHighScore: 1000
   defaultsLives: 3
   resetLostLevel: 1
+  gameRestartDelay: 2
   defaultEndMessage: Game Over
   looseMessage: You Loose
   winMessage: You Win
@@ -1033,9 +1034,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6650417068716629933, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
+      propertyPath: projectileSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650417068716629933, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 3303887041864316649, guid: 01ce183ad338c014bae286b0bb44fdd4, type: 3}
     - target: {fileID: 6650417068716629939, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
       propertyPath: m_Name
       value: PlayerShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650417068716629939, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
