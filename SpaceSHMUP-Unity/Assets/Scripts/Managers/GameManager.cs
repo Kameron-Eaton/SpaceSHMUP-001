@@ -3,7 +3,7 @@
  * Date Created: Feb 23, 2022
  * 
  * Last Edited by: Kameron Eaton
- * Last Edited: April 5, 2022
+ * Last Edited: April 11, 2022
  * 
  * Description: Basic GameManager Template
 ****/
@@ -18,7 +18,7 @@ using UnityEngine.SceneManagement; //libraries for accessing scenes
 //Setting the enum outside the class allows for direct access by the enum (classes) name directly in other classes.
 public enum GameState { Title, Playing, BeatLevel, LostLevel, GameOver, Idle , Testing };
 //enum of game states (work like it's own class)
-
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     /*** VARIABLES ***/
@@ -76,6 +76,10 @@ public class GameManager : MonoBehaviour
 
     static public int score;  //score value
     public int Score { get { return score; } set { score = value; } }//access to static variable score [get/set methods]
+
+    [Space(10)]
+    public AudioClip backgroundMusicClip; //sound clip for background music
+    private AudioSource audioSource; //refernece to audio source
 
     [Space(10)]
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
@@ -137,6 +141,16 @@ public class GameManager : MonoBehaviour
     //Start is called once before the update
     void Start()
     {
+        //if background music exists
+        if(backgroundMusicClip != null)
+        {
+            audioSource = gm.GetComponent<AudioSource>(); //reference to the Audio Source Component
+            audioSource.volume = 0.5f; //volume level of sound
+            audioSource.clip = backgroundMusicClip; //music clip to play
+            audioSource.loop = true; //loop music clip
+            audioSource.Play(); //play the clip
+        }//end if(backgroundMusicSource != null)
+
         //if we run play the game from the level instead of start scene (PLAYTESTING ONLY)
         if (currentSceneName != startScene) { SetGameState(GameState.Testing); }//set the game state for testing }
 
